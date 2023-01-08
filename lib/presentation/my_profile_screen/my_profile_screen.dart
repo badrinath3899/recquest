@@ -12,8 +12,6 @@ import 'package:recquest_21/presentation/messages_dialog/messages_dialog.dart';
 import 'package:recquest_21/presentation/messages_dialog/controller/messages_controller.dart';
 
 class MyProfileScreen extends GetWidget<MyProfileController> {
-  // MyProfileController controller = Get.put(MyProfileController());
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -94,11 +92,14 @@ class MyProfileScreen extends GetWidget<MyProfileController> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(controller.username,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.left,
-                                              style: AppStyle
-                                                  .txtMontserratRomanBold20),
+                                          Obx(
+                                            () => Text(
+                                                controller.firstname.toString(),
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.left,
+                                                style: AppStyle
+                                                    .txtMontserratRomanBold20),
+                                          ),
                                           CustomImageView(
                                               svgPath: ImageConstant.imgEdit,
                                               height: getSize(19.00),
@@ -110,13 +111,16 @@ class MyProfileScreen extends GetWidget<MyProfileController> {
                                               })
                                         ]))),
                             Container(
-                                width: getHorizontalSize(155.00),
-                                margin: getMargin(top: 14),
-                                child: Text("msg_lifestyle_uiux".tr,
+                              width: getHorizontalSize(155.00),
+                              margin: getMargin(top: 14),
+                              child: Obx(
+                                () => Text(controller.email.toString(),
                                     maxLines: null,
                                     textAlign: TextAlign.center,
                                     style:
-                                        AppStyle.txtMontserratRomanRegular10)),
+                                        AppStyle.txtMontserratRomanRegular10),
+                              ),
+                            ),
                             GestureDetector(
                                 onTap: () {
                                   onTapTxtHttpswwwyoutubecom();

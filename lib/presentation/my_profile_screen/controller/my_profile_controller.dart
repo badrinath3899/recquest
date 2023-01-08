@@ -6,17 +6,16 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer';
 
 class MyProfileController extends GetxController {
-  var username = "Username";
+  Rx<String> firstname = "".obs;
+  Rx<String> email = "".obs;
   Rx<MyProfileModel> myProfileModelObj = MyProfileModel().obs;
 
   var isDataLoading = false;
 
   @override
   Future<void> onInit() async {
-    getUserProfile();
-    // final prefs = await SharedPreferences.getInstance();
-    // username = prefs.getString("fullName")!;
     super.onInit();
+    await getUserProfile();
   }
 
   @override
@@ -38,8 +37,10 @@ class MyProfileController extends GetxController {
 
       dynamic responseData = response.data;
       // MyProfileModel userprofile = MyProfileModel.fromJson(response.data);
-      username = StringUtils.capitalize(responseData['firstname']);
-      print(username);
+      // firstname = StringUtils.capitalize(responseData['firstname']);
+      firstname.value = StringUtils.capitalize(responseData['firstname']);
+      email.value = responseData['email'];
+      print(firstname);
     } catch (e) {
       log('Error while getting data is $e');
       print('Error while getting data is $e');

@@ -237,7 +237,8 @@ class SignInScreen extends GetWidget<SignInController> {
       dynamic resondeData = response.data;
       MyProfileModel userprofile = MyProfileModel.fromJson(response.data);
       prefs.setString('access_token', resondeData['access_token']);
-      prefs.setString('fullName', resondeData['user']['firstname']);
+      prefs.setInt('id', resondeData['user']['id']);
+      prefs.setString('firstname', resondeData['user']['firstname']);
       prefs.setString('email', resondeData['user']['email']);
       Get.snackbar('Success', 'Login Success.');
       Get.toNamed(AppRoutes.mainhomeContainerScreen, arguments: userprofile);
